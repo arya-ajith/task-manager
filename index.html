@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Manager</h1>
+            <p class="subtitle">Stay organized and productive</p>
+        </header>
+
+        <div class="task-input-section">
+            <form id="taskForm" class="task-form">
+                <div class="input-group">
+                    <input type="text" id="taskTitle" placeholder="Enter task title..." required>
+                    <textarea id="taskDescription" placeholder="Task description (optional)"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="taskDeadline">Deadline</label>
+                        <input type="datetime-local" id="taskDeadline">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="taskReminder">Reminder</label>
+                        <input type="datetime-local" id="taskReminder">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="taskCategory">Category</label>
+                        <select id="taskCategory">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" id="addTaskBtn" class="btn btn-primary">
+                        <span class="btn-icon">+</span> Add Task
+                    </button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">
+                        Cancel Edit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="filters-section">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">All Tasks</button>
+                <button class="filter-btn" data-filter="pending">Pending</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="overdue">Overdue</button>
+            </div>
+            
+            <div class="sort-group">
+                <select id="sortTasks">
+                    <option value="created">Sort by: Created</option>
+                    <option value="deadline">Sort by: Deadline</option>
+                    <option value="priority">Sort by: Priority</option>
+                    <option value="title">Sort by: Title</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="totalTasks">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pendingTasks">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedTasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="overdueTasks">0</div>
+                <div class="stat-label">Overdue</div>
+            </div>
+        </div>
+
+        <div class="tasks-section">
+            <div id="tasksList" class="tasks-list">
+                <div class="no-tasks" id="noTasks">
+                    <div class="no-tasks-icon">📝</div>
+                    <h3>No tasks yet</h3>
+                    <p>Add your first task to get started!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notifications" class="notifications-container"></div>
+
+    <!-- Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Task Details</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+    <button class="profile-btn" onclick="openProfile()">Profile</button>
+<script>
+function openProfile() {
+    window.location.href = 'profile.html';
+}
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>

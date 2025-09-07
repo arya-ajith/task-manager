@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Page</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
+    }
+
+    .container {
+        background: rgba(255,255,255,0.95);
+        padding: 40px;
+        border-radius: 12px;
+        width: 350px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .container:hover { transform: translateY(-5px); }
+
+    h2 { color: #6a0dad; margin-bottom: 20px; }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        transition: border 0.3s, box-shadow 0.3s;
+        font-size: 16px;
+    }
+
+    input:focus { 
+        border-color: #6a0dad; 
+        outline: none; 
+        box-shadow: 0 0 8px rgba(106,13,173,0.5); 
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #6a0dad;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover { background: #580a9c; transform: scale(1.05); }
+
+    p { font-size: 18px; margin-bottom: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Profile</h2>
+    <p id="welcomeMsg"></p>
+    
+    <input type="text" id="newUsername" placeholder="Edit Username">
+    <input type="password" id="newPassword" placeholder="Edit Password">
+
+    <button id="saveBtn">Save Changes</button>
+    <button id="logoutBtn" style="margin-top:10px;">Logout</button>
+</div>
+
+<script>
+    // Load current username
+    let username = localStorage.getItem('username');
+    if(username) {
+        document.getElementById('welcomeMsg').textContent = `Welcome, ${username}!`;
+        document.getElementById('newUsername').value = username;
+        document.getElementById('newPassword').value = localStorage.getItem('password');
+    } else {
+        alert('You are not logged in!');
+        window.location.href = 'login.html';
+    }
+
+    // Save changes
+    document.getElementById('saveBtn').addEventListener('click', function(){
+        const newUser = document.getElementById('newUsername').value.trim();
+        const newPass = document.getElementById('newPassword').value;
+
+        if(newUser && newPass){
+            localStorage.setItem('username', newUser);
+            localStorage.setItem('password', newPass);
+            alert('Profile updated successfully!');
+            document.getElementById('welcomeMsg').textContent = `Welcome, ${newUser}!`;
+        } else {
+            alert('Please enter valid username and password.');
+        }
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', function(){
+        window.location.href = 'login.html';
+    });
+</script>
+</body>
+</html>
